@@ -11,9 +11,9 @@ interface Props {
 
 export function CallControls({ isRecording, onStart, onStop, onSave, onDownload }: Props) {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+    <div className="bg-gray-800 rounded-lg shadow-lg p-6 mb-6 border border-gray-700">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-800">통화 제어</h2>
+        <h2 className="text-xl font-bold text-white">통화 제어</h2>
         <div className="flex gap-3">
           <button
             onClick={onSave}
@@ -24,7 +24,7 @@ export function CallControls({ isRecording, onStart, onStop, onSave, onDownload 
           </button>
           <button
             onClick={onDownload}
-            className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+            className="flex items-center gap-2 px-4 py-2 bg-[#FF8827] text-white rounded-lg hover:bg-[#ff9d47] transition"
           >
             <Download size={20} />
             다운로드
@@ -36,7 +36,7 @@ export function CallControls({ isRecording, onStart, onStop, onSave, onDownload 
         {!isRecording ? (
           <button
             onClick={onStart}
-            className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="flex items-center gap-3 px-8 py-4 bg-[#FF8827] text-white rounded-full hover:bg-[#ff9d47] transition shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             <Phone size={24} />
             <span className="font-bold text-lg">통화 시작</span>
@@ -53,7 +53,7 @@ export function CallControls({ isRecording, onStart, onStop, onSave, onDownload 
       </div>
 
       {isRecording && (
-        <div className="mt-4 flex items-center justify-center gap-2 text-red-600">
+        <div className="mt-4 flex items-center justify-center gap-2 text-[#FF8827]">
           <Mic className="animate-pulse" size={20} />
           <span className="font-semibold">녹음 중...</span>
         </div>
