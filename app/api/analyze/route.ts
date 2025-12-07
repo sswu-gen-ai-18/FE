@@ -3,7 +3,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     console.log('Request body:', body);
 
-    const backendUrl = 'https://carely-zjex.onrender.com/api/analyze-solar';
+    const backendUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/analyze-solar`;
     console.log('Calling backend:', backendUrl);
 
     const response = await fetch(backendUrl, {
