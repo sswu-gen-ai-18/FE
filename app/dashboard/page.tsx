@@ -56,6 +56,7 @@ export default function DashboardPage() {
   const [aiManual, setAiManual] = useState('');
   const [callRecords, setCallRecords] = useState<CallRecord[]>([]);
   const [currentEmotion, setCurrentEmotion] = useState('neutral');
+  const [emotionScore, setEmotionScore] = useState(0);
   const [customerData] = useState<CustomerData>({
     name: '김민수',
     gender: '남성',
@@ -102,7 +103,10 @@ export default function DashboardPage() {
           
           const detectedEmotion = emotionMap[result.emotion_label.toLowerCase()] || 'neutral';
           setCurrentEmotion(detectedEmotion);
-          console.log('Emotion detected:', detectedEmotion, 'from:', result.emotion_label);
+          
+          // 감정 점수 설정 (0~1)
+          setEmotionScore(result.emotion_score || 0);
+          console.log('Emotion detected:', detectedEmotion, 'Score:', result.emotion_score);
           
           // 대응 매뉴얼 설정
           setAiManual(result.response_text);
@@ -320,7 +324,7 @@ export default function DashboardPage() {
                   {/* 배경 원 */}
                   <svg className="absolute w-full h-full" viewBox="0 0 120 120">
                     <circle cx="60" cy="60" r="50" fill="none" stroke="#374151" strokeWidth="8" />
-                    {/* 감정 상태 표시 */}
+                    {/* 감정 상태 표시 (emotion_score 반영) */}
                     <circle
                       cx="60"
                       cy="60"
@@ -328,7 +332,7 @@ export default function DashboardPage() {
                       fill="none"
                       stroke={getEmotionColor(currentEmotion)}
                       strokeWidth="8"
-                      strokeDasharray={`${157 * (isRecording ? 1 : 0)} 157`}
+                      strokeDasharray={`${157 * emotionScore} 157`}
                       className="transition-all duration-500"
                       strokeLinecap="round"
                     />
@@ -336,7 +340,10 @@ export default function DashboardPage() {
                   {/* 중앙 이모지 */}
                   <div className="text-6xl z-10">{getEmotionEmoji(currentEmotion)}</div>
                 </div>
-                <p className="mt-4 text-center text-gray-300 font-semibold capitalize">{currentEmotion}</p>
+                <p className="mt-4 text-center">
+                  <span className="text-gray-300 font-semibold capitalize">{currentEmotion}</span>
+                  <span className="text-xs text-gray-400 ml-2">({(emotionScore * 100).toFixed(2)}%)</span>
+                </p>
               </div>
             </div>
 
