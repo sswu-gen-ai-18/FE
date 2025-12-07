@@ -342,10 +342,12 @@ export default function DashboardPage() {
 
             {/* 대응 매뉴얼 - 중앙에 크게 */}
             <ResponseManual manual={aiManual} />
-
-            {/* 통화 기록 */}
-            <CallHistory records={callRecords} />
           </div>
+        </div>
+
+        {/* 통화 기록 - 전체 너비 */}
+        <div className="w-full">
+          <CallHistory records={callRecords} />
         </div>
       </div>
     </div>
